@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'styleIndex.css' %}">
+    <title>Tech Solutio</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a class="logo" href="{% url 'index' %}">Tech Solutio</a>
+            <ul class="nav-list">
+                <li><a href="{% url 'cadastroProduto' %}">Cadastrar</a></li>
+                <li><a href="{% url 'lista' %}">Listar</a></li>
+                <li><input type="reset" value="Logout"></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+
+    </main>
+</body>
+</html>

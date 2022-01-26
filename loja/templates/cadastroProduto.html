@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styleIndex.css">
+    <title>Cadastrar Produto</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a class="logo" href="/">Tech Solutio</a>
+            <ul class="nav-list">
+                <li><a href="cadastroProduto.html">Cadastrar</a></li>
+                <li><a href="listaProdutos.html">Listar</a></li>
+                <li><input type="reset" value="Logout"></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <form action="listaProdutos.html" method="post">
+            <div class="containerProduto">
+                <h1>Cadastro de Produto</h1>
+                <label for="produto">Produto:</label>
+                <input type="text" name="produto" placeholder="Digite o nome do produto"> 
+                <label for="fornecedor">Fornecedor:</label>
+                <input type="text" name="fornecedor" placeholder="Digite o nome do fornecedor">
+                <label for="preco">Preço:</label>
+                <input type="number" name="preco" placeholder="Digite o preço do produto">
+                <input type="submit" value="Cadastrar" class="editar" id="2">
+            </div>
+        </form>
+    </main>
+</body>
+</html>
