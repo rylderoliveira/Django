@@ -7,7 +7,7 @@ def index(request):
 
 def lista(request):
 
-    produtos = Produto.objects.all()
+    produtos = Produto.objects.order_by('nome').filter(publicado=True)
 
     listaProdutos = {
         'lista': produtos

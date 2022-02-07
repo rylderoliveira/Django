@@ -4,3 +4,5 @@ from django.db import models
 class Pessoas(models.Model):
     usuario = models.CharField(max_length=225)
     senha = models.CharField(max_length=225)
+    def __str__(self) -> str:
+        return self.usuario
