@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>Cadastro</title>
+</head>
+<body>
+    <div class="container">
+        <form action="{% url 'cadastroUsuario' %}" method="POST">
+            {% csrf_token %}
+            <h1>Cadastro</h1>
+            <label for="Usuario">Usuario:</label>
+            <input type="text" name="user" id="user" placeholder="Digite seu usuario" required>
+            <label for="Senha">Senha:</label>
+            <input type="password" name="password" id="password" placeholder="Digite sua senha" required>
+            <input type="submit" value="Cadastrar">
+        </form>
+    </div>
+</body>
+</html>
