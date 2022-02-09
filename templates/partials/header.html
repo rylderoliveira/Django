@@ -2,9 +2,14 @@
     <nav>
         <a class="logo" href="{% url 'index' %}">Loja</a>
         <ul class="nav-list">
-            <li><a href="{% url 'cadastroProduto' %}">Cadastrar</a></li>
-            <li><a href="{% url 'lista' %}">Listar</a></li>
-            <li><input type="reset" value="Logout"></li>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'cadastroProduto' %}">Cadastrar</a></li>
+                <li><a href="{% url 'lista' %}">Listar</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+            {% else %}
+                <li><a href="{% url 'lista' %}">Listar</a></li>
+                <li><a href="{% url 'login' %}">Login</a></li>
+            {% endif %}
         </ul>
     </nav>
 </header>

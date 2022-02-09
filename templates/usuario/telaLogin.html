@@ -10,7 +10,8 @@
 </head>
 <body>
     <div class="container">
-        <form action="#" method="post">
+        <form action="{% url 'login' %}" method="POST">
+            {% csrf_token %}
             <h1>Login</h1>
             <label for="Usuario">Usuario:</label>
             <input type="text" name="user" id="user" placeholder="Digite seu usuario">
