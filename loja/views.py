@@ -1,5 +1,9 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
+
+from loja.forms import ProductForm
 from .models import Produto
+from django.contrib.auth.models import User
+
 
 # Create your views here.
 def index(request):
@@ -15,12 +19,24 @@ def lista(request):
     
     return render(request, 'listaProdutos.html', listaProdutos)
 
-def cadastroProduto(request):
-    return render(request, 'cadastroProduto.html')
-
 def editarProduto(request, produto_id):
+        
     produto = get_object_or_404(Produto, pk=produto_id)
-    produto_a_ixibir = {
-        'produto': produto
+    form = ProductForm(instance=produto)
+
+    if request.method=='POST':
+        form = ProductForm(request.POST, instance=produto)
+        if form.is_valid():
+            form.save()
+            return redirect('lista')
+
+    context = {
+        'form': form
     }
-    return render(request, 'editarProduto.html', produto_a_ixibir)
+    return render(request, 'editarProduto.html', context)
+
+def deletarProduto(request, produto_id):
+    produto = get_object_or_404(Produto, pk=produto_id)
+    produto.delete()
+    return redirect('lista')
+    

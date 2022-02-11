@@ -1,8 +1,10 @@
 from pdb import post_mortem
+from tkinter import Widget
 from django.forms import ModelForm
 from .models import Produto
 
-class ProdutoForm(ModelForm):
+class ProductForm(ModelForm):
     class Meta:
         model = Produto
-        fields = ['nome', 'fornecedor', 'preco']
+        fields = ['nome','fornecedor','preco','publicado']
+        

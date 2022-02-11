@@ -1,6 +1,8 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.models import User
 from django.contrib import auth
+from loja.models import Produto
+from loja.forms import ProductForm
 
 # Create your views here.
 def cadastroUsuario(request):
@@ -46,6 +48,8 @@ def login(request):
                 return redirect('dashboard')
             else:
                 return redirect('login')
+        else:
+            return redirect('login')
     else:
         return render(request, 'usuario/telaLogin.html')
 
@@ -58,3 +62,62 @@ def dashboard(request):
         return render(request, 'usuario/dashboard.html')
     else:
         return redirect('index')
+
+def cadastroProduto(request):
+    if request.method == "POST":
+        user = get_object_or_404(User, pk=request.user.id)
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            publicado = request.POST['publicado']
+            if publicado == 'on':
+                publicado = True
+            else:
+                publicado = False
+            produto = Produto.objects.create(nome=request.POST['nome'], fornecedor=request.POST['fornecedor'], preco=request.POST['preco'], cadastrado_por=user, publicado=publicado)
+            produto.save()
+            return redirect('lista')
+    else:
+        form = ProductForm
+        return render(request, 'cadastroProduto.html', {'form': form})
+
+
+
+
+
+    # if request.method=="POST":
+    #     nome = request.POST['produto']
+    #     fornecedor = request.POST['fornecedor']
+    #     preco = request.POST['preco']
+    #     cadastrado_por = get_object_or_404(User, pk=request.user.id)
+    #     publicado = request.POST['publicado']
+
+    #     if publicado == 'on':
+    #         publicado = True
+    #     else:
+    #         publicado = False
+
+    #     # Validações
+    #     if not nome.strip():
+    #         print('Nome invalido')
+    #         return redirect('cadastroProduto')
+        
+    #     if not fornecedor.strip():
+    #         print('Fornecedor invalido')
+    #         return redirect('cadastroProduto')
+        
+    #     if preco is None:
+    #         print('Preço invalido')
+    #         return redirect('cadastroProduto')
+
+    #     if Produto.objects.filter(nome=nome).exists():
+    #         print('Produto já cadastrado')
+    #         return redirect('cadastroProduto')
+        
+    #     produto = Produto.objects.create(nome=nome, fornecedor=fornecedor, preco=preco, cadastrado_por=cadastrado_por, publicado=publicado)
+    #     produto.save()
+    #     print(publicado)
+    #     print('Produto cadastrado com sucesso')
+    #     return redirect('lista')
+    # else:
+    #     return render(request, 'cadastroProduto.html')
+

@@ -14,7 +14,7 @@
                     <td>{{ produto.nome }}</td>
                     <td>{{ produto.fornecedor }}</td>
                     <td>{{ produto.preco }}</td>
-                    <td class="botoes"><a href="{% url 'editarProduto' produto.id %}" class="editar">Editar</a><button onClick="" class="deletar">Deletar</button></td>
+                    <td class="botoes"><a href="{% url 'editarProduto' produto.id %}" class="editar">Editar</a><a href="{% url 'deletarProduto' produto.id %}" class="deletar">Deletar</a></td>
                 </tr>
             {% endfor %}
         </tbody>
