@@ -5,7 +5,9 @@
                 <th>Produto</th>
                 <th>Fornecedor</th>
                 <th>Preço</th>
-                <th></th>
+                {% if user.is_authenticated %}
+                    <th>Ações</th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
@@ -14,7 +16,12 @@
                     <td>{{ produto.nome }}</td>
                     <td>{{ produto.fornecedor }}</td>
                     <td>{{ produto.preco }}</td>
-                    <td class="botoes"><a href="{% url 'editarProduto' produto.id %}" class="editar">Editar</a><a href="{% url 'deletarProduto' produto.id %}" class="deletar">Deletar</a></td>
+                    {% if user.is_authenticated %}
+                        <td class="botoes">
+                            <a href="{% url 'editarProduto' produto.id %}" class="editar">Editar</a>
+                            <a href="{% url 'deletarProduto' produto.id %}" class="deletar">Deletar</a>
+                        </td>
+                    {% endif %}
                 </tr>
             {% endfor %}
         </tbody>
