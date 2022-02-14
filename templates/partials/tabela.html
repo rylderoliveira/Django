@@ -18,8 +18,8 @@
                     <td>{{ produto.preco }}</td>
                     {% if user.is_authenticated %}
                         <td class="botoes">
-                            <a href="{% url 'editarProduto' produto.id %}" class="editar">Editar</a>
-                            <a href="{% url 'deletarProduto' produto.id %}" class="deletar">Deletar</a>
+                            <a href="{% url 'editarProduto' produto.id %}" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter" >Editar</a>
+                            <a href="{% url 'deletarProduto' produto.id %}" class="btn btn-danger">Deletar</a>
                         </td>
                     {% endif %}
                 </tr>
