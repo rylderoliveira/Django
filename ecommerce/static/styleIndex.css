@@ -142,15 +142,6 @@ input {
     border-radius: 2px;
 }
 
-input[type="submit"] {
-    border-radius: 10px;
-    background-color: #4CAF50;
-    border: none;
-    font-weight: bold;
-    font-size:large;
-    color: white;
-}
-
 h1 {
     text-align: center;
     padding-bottom: 20px;
