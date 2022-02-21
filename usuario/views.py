@@ -68,14 +68,22 @@ def dashboard(request):
 def cadastroProduto(request):
     if request.method == "POST":
         user = get_object_or_404(User, pk=request.user.id)
-        form = ProductForm(request.POST)
+        form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
             publicado = request.POST['publicado']
+            
             if publicado == 'on':
                 publicado = True
             else:
                 publicado = False
-            produto = Produto.objects.create(nome=request.POST['nome'], fornecedor=request.POST['fornecedor'], preco=request.POST['preco'], cadastrado_por=user, publicado=publicado)
+            produto = Produto.objects.create(
+                nome=request.POST['nome'], 
+                fornecedor=request.POST['fornecedor'], 
+                preco=request.POST['preco'], 
+                cadastrado_por=user, 
+                publicado=publicado, 
+                imagem=request.FILES['imagem']
+                )
             produto.save()
             messages.success(request, 'O produto %s foi cadastrado com sucesso' %request.POST['nome'])
             return redirect('lista')

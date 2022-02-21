@@ -154,3 +154,8 @@ h1 {
 input[type="checkbox"] {
     width: 20px;
 }
+
+.carrossel {
+    display: flex;
+    width: 100%
+}

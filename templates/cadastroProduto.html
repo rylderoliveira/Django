@@ -2,7 +2,7 @@
     {% include 'parcials/header.html' %}
     {% block content %}
     <div class="containerProduto">
-        <form action="{% url 'cadastroProduto' %}" method="POST">
+        <form action="{% url 'cadastroProduto' %}" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <h1>Cadastro de Produto</h1>
             {{form.as_p}}

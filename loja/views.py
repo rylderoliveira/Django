@@ -8,7 +8,14 @@ from django.contrib import messages
 
 # Create your views here.
 def index(request):
-    return render(request, 'index.html')
+
+    produtos = Produto.objects.order_by('nome').filter(publicado=True)
+
+    listaProdutos = {
+        'lista': produtos
+    }
+    
+    return render(request, 'index.html', listaProdutos)
 
 def lista(request):
 
