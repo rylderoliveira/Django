@@ -8,4 +8,4 @@ class Produto(models.Model):
     fornecedor = models.CharField(max_length=200)
     preco = models.DecimalField(max_digits=8, decimal_places=2)
     publicado = models.BooleanField(default=False)
-    imagem = models.ImageField(default='ProdutoPadrão', blank=True, upload_to='fotos/%d/%m/%Y/', )
+    imagem = models.ImageField(default='ProdutoPadrão', blank=True, upload_to='fotos/%d/%m/%Y/', null=True)

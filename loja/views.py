@@ -15,7 +15,7 @@ def index(request):
         'lista': produtos
     }
     
-    return render(request, 'index.html', listaProdutos)
+    return render(request, 'loja/index.html', listaProdutos)
 
 def lista(request):
 
@@ -25,7 +25,7 @@ def lista(request):
         'lista': produtos
     }
     
-    return render(request, 'listaProdutos.html', listaProdutos)
+    return render(request, 'loja/listaProdutos.html', listaProdutos)
 
 def editarProduto(request, produto_id):
         
@@ -40,7 +40,7 @@ def editarProduto(request, produto_id):
             return redirect('lista')
         else:
             messages.error(request, 'Houve um erro na validação dos dados')
-            return render(request, 'editarProduto.html', context)
+            return render(request, 'loja/editarProduto.html', context)
 
 
     context = {
@@ -52,4 +52,32 @@ def deletarProduto(request, produto_id):
     produto = get_object_or_404(Produto, pk=produto_id)
     produto.delete()
     return redirect('lista')
-    
+
+def cadastroProduto(request):
+    if request.method == "POST":
+        user = get_object_or_404(User, pk=request.user.id)
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            publicado = request.POST['publicado']
+            
+            if publicado == 'on':
+                publicado = True
+            else:
+                publicado = False
+            produto = Produto.objects.create(
+                nome=request.POST['nome'], 
+                fornecedor=request.POST['fornecedor'], 
+                preco=request.POST['preco'], 
+                cadastrado_por=user, 
+                publicado=publicado, 
+                imagem=request.FILES['imagem']
+                )
+            produto.save()
+            messages.success(request, 'O produto %s foi cadastrado com sucesso' %request.POST['nome'])
+            return redirect('lista')
+        else:
+            messages.error(request, 'Houve um erro na válidação dos dados')
+            return render(request, 'loja/cadastroProduto.html', {'form': form})
+    else:
+        form = ProductForm
+        return render(request, 'loja/cadastroProduto.html', {'form': form})
