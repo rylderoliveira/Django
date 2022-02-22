@@ -1,24 +1,12 @@
 {% extends '_head.html'%}
-    {% include 'parcials/header.html' %}
-    {% block content %}
+{% block content %}
     <div class="containerProduto">
         <form action="{% url 'cadastroProduto' %}" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <h1>Cadastro de Produto</h1>
             {{form.as_p}}
-            <!-- <h1>Cadastro de Produto</h1>
-            <label for="produto">Produto:</label>
-            <input type="text" name="produto" placeholder="Digite o nome do produto"> 
-            <label for="fornecedor">Fornecedor:</label>
-            <input type="text" name="fornecedor" placeholder="Digite o nome do fornecedor">
-            <label for="preco">Preço:</label>
-            <input type="number" name="preco" step="0.01" min="0.00" placeholder="Digite o preço do produto">
-            <div class="pub">
-                <input type="checkbox" name="publicado" title="publicado" checked>
-                <label for="preco">Publicar</label>
-            </div> -->
             <input class="btn btn-success" type="submit" value="Cadastrar" class="editar" id="2">
         </form>
     </div>
     
-    {% endblock %}
+{% endblock %}

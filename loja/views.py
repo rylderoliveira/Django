@@ -19,7 +19,7 @@ def index(request):
 
 def lista(request):
 
-    produtos = Produto.objects.order_by('nome').filter(publicado=True)
+    produtos = Produto.objects.order_by('nome').filter(cadastrado_por_id=request.user.id)
 
     listaProdutos = {
         'lista': produtos

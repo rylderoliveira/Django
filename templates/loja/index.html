@@ -1,19 +1,17 @@
 {% extends '_head.html' %}
 {% block content %}
-    <br>
-    {% include 'partials/alertas.html' %}
-    <div class="carrossel">
-      {% for produto in lista %}
-        <div class="card" style="width: 23%; margin-left: 1%">
-          <img src="{{ produto.imagem.url }}" class="img-thumbnail" style="width:300px; height:300px; display: flex; align-self: center;" alt="Produto">
-          <div class="card-body">
-            <h5 class="card-title">{{ produto.nome }}</h5>
-            <p class="card-text">{{ produto.fornecedor }}</p>
-            <a href="#" class="btn btn-primary">{{ produto.preco }}</a>
-          </div>
-        </div> 
-      {% endfor %}
-    </div>
-    
-
+  <br>
+  {% include 'partials/alertas.html' %}
+  <div style="display:flex; width: 100%; flex-wrap: wrap; padding-bottom: 20px">
+    {% for produto in lista %}
+      <div class="card" style="width: 23%; margin: 1%">
+        <img src="{{ produto.imagem.url }}" class="img-thumbnail" style="width:300px; height:300px; display: flex; align-self: center; margin: 5px;" alt="Produto">
+        <div class="card-body">
+          <h5 class="card-title">{{ produto.nome }}</h5>
+          <p class="card-text">{{ produto.fornecedor }}</p>
+          <a href="#" class="btn btn-primary">{{ produto.preco }}</a>
+        </div>
+      </div> 
+    {% endfor %}
+  </div>
 {% endblock %}
