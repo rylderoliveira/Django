@@ -1,6 +1,5 @@
 {% extends '_head.html' %}
 {% block content %}
-  <br>
   {% include 'partials/alertas.html' %}
   <div style="display:flex; width: 100%; flex-wrap: wrap; padding-bottom: 20px">
     {% for produto in lista %}
@@ -14,4 +13,5 @@
       </div> 
     {% endfor %}
   </div>
+  {% include 'partials/paginator.html' %}
 {% endblock %}

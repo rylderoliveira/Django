@@ -4,6 +4,7 @@ from loja.forms import ProductForm
 from .models import Produto
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 # Create your views here.
@@ -11,8 +12,12 @@ def index(request):
 
     produtos = Produto.objects.order_by('nome').filter(publicado=True)
 
+    paginator = Paginator(produtos, 4)
+    page = request.GET.get('page')
+    produtos_por_pagina = paginator.get_page(page)
+
     listaProdutos = {
-        'lista': produtos
+        'lista': produtos_por_pagina
     }
     
     return render(request, 'loja/index.html', listaProdutos)
@@ -21,8 +26,12 @@ def lista(request):
 
     produtos = Produto.objects.order_by('nome').filter(cadastrado_por_id=request.user.id)
 
+    paginator = Paginator(produtos, 3)
+    page = request.GET.get('page')
+    produtos_por_pagina = paginator.get_page(page)
+
     listaProdutos = {
-        'lista': produtos
+        'lista': produtos_por_pagina
     }
     
     return render(request, 'loja/listaProdutos.html', listaProdutos)
